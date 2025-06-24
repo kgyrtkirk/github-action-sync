@@ -32,7 +32,7 @@ last_sha=$(git_cmd git rev-list -1 upstream/${INPUT_UPSTREAM_BRANCH})
 echo "Last commited SHA: ${last_sha}"
 
 up_to_date=$(git_cmd git rev-list origin/${INPUT_BRANCH} | grep ${last_sha} | wc -l)
-pr_branch="up-${last_sha}"
+pr_branch="${INPUT_SYNC_BRANCH_PREFIX}-${last_sha}"
 
 if [[ "${up_to_date}" -eq 0 ]]; then
   git_cmd git checkout -b "${pr_branch}" --track "upstream/${INPUT_UPSTREAM_BRANCH}"

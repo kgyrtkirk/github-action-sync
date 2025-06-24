@@ -19,6 +19,10 @@ inputs:
     description: 'Title for the PRs opened'
     required: false
     default: 'Upstream'
+  sync_branch_prefix:
+    description: 'Prefix to be used for sync branches'
+    required: false
+    default: 'up'
 runs:
   using: 'docker'
   image: 'Dockerfile'
