@@ -15,6 +15,10 @@ inputs:
     description: 'Labels for the new PR'
     required: false
     default: 'autocreated'
+  pr_title:
+    description: 'Title for the PRs opened'
+    required: false
+    default: 'Upstream'
 runs:
   using: 'docker'
   image: 'Dockerfile'

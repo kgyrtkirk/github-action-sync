@@ -46,7 +46,7 @@ if [[ "${up_to_date}" -eq 0 ]]; then
     echo "PR Already exists!!!"
     exit 0
   else
-    git_cmd hub pull-request -b "${INPUT_BRANCH}" -h "${pr_branch}" -l "${INPUT_PR_LABELS}" -a "${GITHUB_ACTOR}" -m "\"Upstream: ${last_sha}\""
+    git_cmd hub pull-request -b "${INPUT_BRANCH}" -h "${pr_branch}" -l "${INPUT_PR_LABELS}" -a "${GITHUB_ACTOR}" -m "\"${INPUT_PR_TITLE}: ${last_sha}\""
   fi
 else
   echo "Branch up-to-date"
