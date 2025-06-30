@@ -24,8 +24,6 @@ git_cmd() {
   fi
 }
 
-[ "$ACTIONS_RUNNER_DEBUG" == "true" ] && set -x
-
 git_setup
 git remote add upstream ${INPUT_UPSTREAM}
 git fetch --all
