@@ -50,6 +50,7 @@ if [[ "${up_to_date}" -eq 0 ]]; then
     fi
   fi
 
+  git remote remove upstream
   hub pr list
   pr_exists=$(hub pr list | grep ${last_sha} | wc -l)
 
