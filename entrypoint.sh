@@ -24,7 +24,7 @@ git_cmd() {
   fi
 }
 
-[ "$ACTIONS_STEP_DEBUG" == "true" ] && set -x
+[ "$ACTIONS_RUNNER_DEBUG" == "true" ] && set -x
 
 git_setup
 git remote add upstream ${INPUT_UPSTREAM}
@@ -73,6 +73,7 @@ if [ "${INPUT_CLEANUP}" == "true" ];then
      if git log -n1 --oneline "$pr_sha" ;then
        base=$(git merge-base origin/${INPUT_BRANCH} ${pr_sha})
        if [ "$base" == "$pr_sha" ]; then
+         echo git_cmd gh pr close "$PR_NUMBER" --comment "Content was already merged." --delete-branch
          git_cmd gh pr close "$PR_NUMBER" --comment "Content was already merged." --delete-branch
        fi
      fi
