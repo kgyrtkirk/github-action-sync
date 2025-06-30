@@ -70,8 +70,8 @@ if [ "${INPUT_CLEANUP}" == "true" ];then
   for PR_NUMBER in $(gh pr list -l "${INPUT_PR_LABELS}" -S "in:title ${INPUT_PR_TITLE}" --json number -q '.[].number'); do
      pr_sha=$(gh pr view $PR_NUMBER --json title -q '.title' | sed 's/.*://'| tr -d ' ')
      echo "cleanup $PR_NUMBER; sha: $pr_sha"
-     if git log --oneline "$pr_sha" ;then
-       base=$(git merge-base ${INPUT_BRANCH} ${pr_sha})
+     if git log -n1 --oneline "$pr_sha" ;then
+       base=$(git merge-base origin/${INPUT_BRANCH} ${pr_sha})
        if [ "$base" == "$pr_sha" ]; then
          git_cmd gh pr close "$PR_NUMBER" --comment "Content was already merged." --delete-branch
        fi
