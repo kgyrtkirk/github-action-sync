@@ -59,7 +59,7 @@ if [[ "${up_to_date}" -eq 0 ]]; then
     exit 0
   else
     git_cmd git push -u origin "${pr_branch}"
-    git_cmd hub pull-request -b "${INPUT_BRANCH}" -h "${pr_branch}" -l "${INPUT_PR_LABELS}" -a "${GITHUB_ACTOR}" -m "\"${INPUT_PR_TITLE}: ${last_sha}\""
+    git_cmd hub pull-request -b "${INPUT_BRANCH}" -h "${pr_branch}" -l "${INPUT_PR_LABELS}" -m "\"${INPUT_PR_TITLE}: ${last_sha}\""
   fi
 else
   echo "Branch up-to-date"
