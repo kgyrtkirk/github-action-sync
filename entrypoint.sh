@@ -76,5 +76,5 @@ if [ "${INPUT_CLEANUP}" == "true" ];then
          gh pr close "$PR_NUMBER" --comment "Content was already merged." --delete-branch
        fi
      fi
-  fi
+  done
 fi
