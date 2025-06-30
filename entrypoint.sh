@@ -63,7 +63,6 @@ if [[ "${up_to_date}" -eq 0 ]]; then
   fi
 else
   echo "Branch up-to-date"
-  exit 0
 fi
 
 if [ "${INPUT_CLEANUP}" == "true" ];then
