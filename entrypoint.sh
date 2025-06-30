@@ -28,7 +28,7 @@ git_setup
 git_cmd git remote add upstream ${INPUT_UPSTREAM}
 git_cmd git fetch --all
 
-last_sha=$(git_cmd git rev-list -1 upstream/${INPUT_UPSTREAM_BRANCH})
+last_sha=$(git rev-list -1 upstream/${INPUT_UPSTREAM_BRANCH})
 echo "Last commited SHA: ${last_sha}"
 
 up_to_date=$(git_cmd git rev-list origin/${INPUT_BRANCH} | grep ${last_sha} | wc -l)
