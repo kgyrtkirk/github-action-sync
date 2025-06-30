@@ -27,6 +27,10 @@ inputs:
     description: 'In case source is inside the same repo - the GHA runs of the opened PR may pollute the original commit-s status. Setting this enables a try to auto-merge the base branch - but if unsuccessfull falls back to add a technical commit commit message with the given message'
     required: false
     default: ''
+  cleanup:
+    description: 'Cleans up open PR for which the base was already merged'
+    required: false
+    default: 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
