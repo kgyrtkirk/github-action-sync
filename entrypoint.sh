@@ -1,7 +1,5 @@
 #!/bin/sh -l
 
-set
-
 git_setup() {
   cat <<- EOF > $HOME/.netrc
     machine github.com
@@ -67,7 +65,6 @@ else
   echo "Branch up-to-date"
 fi
 
-alias gh=hub
 if [ "${INPUT_CLEANUP}" == "true" ];then
   echo "@ cleanup"
   gh pr list -l "${INPUT_PR_LABELS}" -S "in:title ${INPUT_PR_TITLE}" --json number -q '.[].number'
