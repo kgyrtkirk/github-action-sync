@@ -18,9 +18,9 @@ EOF
 
 git_cmd() {
   if [[ "${DRY_RUN:-false}" == "true" ]]; then
-    echo $@
+    echo "$@"
   else
-    eval $@
+    eval "$@"
   fi
 }
 
