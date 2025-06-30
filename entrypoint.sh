@@ -35,9 +35,18 @@ up_to_date=$(git_cmd git rev-list origin/${INPUT_BRANCH} | grep ${last_sha} | wc
 pr_branch="${INPUT_SYNC_BRANCH_PREFIX}-${last_sha}"
 
 if [[ "${up_to_date}" -eq 0 ]]; then
-  git_cmd git checkout -b "${pr_branch}" --track "upstream/${INPUT_UPSTREAM_BRANCH}"
-  git_cmd git push -u origin "${pr_branch}"
-  git_cmd git remote remove upstream
+
+  git checkout -b "${pr_branch}" --track "upstream/${INPUT_UPSTREAM_BRANCH}"
+  if [ "${INPUT_DENOISE_MESSAGE}" != "" ]; then
+    echo "@ denoise enabled."
+    if git merge "origin/${INPUT_BRANCH}"; then
+        echo "@ denoised: merge commit"
+    else
+        echo "@ denoised: empty commit"
+        git merge --abort
+        git commit --allow-empty -m "${INPUT_DENOISE_MESSAGE}"
+    fi
+  fi
 
   hub pr list
   pr_exists=$(git_cmd hub pr list | grep ${last_sha} | wc -l)
@@ -46,6 +55,7 @@ if [[ "${up_to_date}" -eq 0 ]]; then
     echo "PR Already exists!!!"
     exit 0
   else
+    git_cmd git push -u origin "${pr_branch}"
     git_cmd hub pull-request -b "${INPUT_BRANCH}" -h "${pr_branch}" -l "${INPUT_PR_LABELS}" -a "${GITHUB_ACTOR}" -m "\"${INPUT_PR_TITLE}: ${last_sha}\""
   fi
 else

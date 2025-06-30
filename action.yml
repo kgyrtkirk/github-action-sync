@@ -23,6 +23,10 @@ inputs:
     description: 'Prefix to be used for sync branches'
     required: false
     default: 'up'
+  denoise_message:
+    description: 'In case source is inside the same repo - the GHA runs of the opened PR may pollute the original commit-s status. Setting this enables a try to auto-merge the base branch - but if unsuccessfull falls back to add a technical commit commit message with the given message'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
