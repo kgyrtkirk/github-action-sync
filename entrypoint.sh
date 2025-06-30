@@ -25,6 +25,7 @@ git_cmd() {
 }
 
 git_setup
+set -x
 git remote add upstream ${INPUT_UPSTREAM}
 git fetch --all
 
