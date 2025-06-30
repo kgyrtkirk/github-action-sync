@@ -67,6 +67,7 @@ fi
 
 if [ "${INPUT_CLEANUP}" == "true" ];then
   echo "@ cleanup"
+  gh pr list -l "${INPUT_PR_LABELS}" -S "in:title ${INPUT_PR_TITLE}" --json number -q '.[].number'
   for PR_NUMBER in gh pr list -l "${INPUT_PR_LABELS}" -S "in:title ${INPUT_PR_TITLE}" --json number -q '.[].number'; do
      pr_sha=$(gh pr view $PR_NUMBER --json title -q '.title' | sed 's/.*://')
      echo "cleanup $PR_NUMBER; sha: $pr_sha"
