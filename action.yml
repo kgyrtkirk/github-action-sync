@@ -32,8 +32,10 @@ inputs:
     required: false
     default: 'false'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  steps:
+    - run: $GITHUB_ACTION_PATH/entrypoint.sh
+      shell: bash
 branding:
   icon: git-merge
   color: yellow
