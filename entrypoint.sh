@@ -25,13 +25,13 @@ git_cmd() {
 }
 
 git_setup
-git_cmd git remote add upstream ${INPUT_UPSTREAM}
-git_cmd git fetch --all
+git remote add upstream ${INPUT_UPSTREAM}
+git fetch --all
 
 last_sha=$(git rev-list -1 upstream/${INPUT_UPSTREAM_BRANCH})
 echo "Last commited SHA: ${last_sha}"
 
-up_to_date=$(git_cmd git rev-list origin/${INPUT_BRANCH} | grep ${last_sha} | wc -l)
+up_to_date=$(git rev-list origin/${INPUT_BRANCH} | grep ${last_sha} | wc -l)
 pr_branch="${INPUT_SYNC_BRANCH_PREFIX}-${last_sha}"
 
 if [[ "${up_to_date}" -eq 0 ]]; then
@@ -49,7 +49,7 @@ if [[ "${up_to_date}" -eq 0 ]]; then
   fi
 
   hub pr list
-  pr_exists=$(git_cmd hub pr list | grep ${last_sha} | wc -l)
+  pr_exists=$(hub pr list | grep ${last_sha} | wc -l)
 
   if [[ "${pr_exists}" -gt 0 ]]; then
     echo "PR Already exists!!!"
