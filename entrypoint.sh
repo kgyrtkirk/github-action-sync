@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+set
+
 git_setup() {
   cat <<- EOF > $HOME/.netrc
     machine github.com
